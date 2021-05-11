@@ -1,0 +1,49 @@
+version: "3"
+
+services:
+  nginx:
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: nginx
+    container_name: nginx
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - node
+    networks:
+      - node-net
+
+  node:
+    build:
+      context: ./node
+      dockerfile: Dockerfile
+    image: zaquielgrings/node
+    container_name: node
+    networks:
+      - node-net
+    tty: true
+    ports:
+      - "3000:3000"
+    depends_on:
+      - mysql
+
+  mysql:
+    build:
+      context: ./mysql
+      dockerfile: Dockerfile
+    image: zaquielgrings/mysql:5.7
+    container_name: mysqldb
+    restart: always
+    tty: true
+    volumes:
+      - ./mysql/db:/var/lib/mysql/
+    environment:
+      - MYSQL_DATABASE=desafionodedb
+      - MYSQL_ROOT_PASSWORD=root
+    networks:
+      - node-net
+networks:
+  node-net:
+    driver: bridge
