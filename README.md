@@ -1,6 +1,6 @@
 # Nginx com Node.js
 
-A idéia nesse desafio é criar uma aplicação node que insira um nome em uma tabela do banco de dados mysql, sempre que for chamada e retorne os nomes já inseridos.
+A ideia nesse desafio é criar uma aplicação node que insira um nome em uma tabela do banco de dados mysql, sempre que for chamada e retorne os nomes já inseridos.
 Além disso utilizar o nginx como proxy reverso para a aplicação.
 
 O retorno da aplicação node.js para o nginx deverá ser:
